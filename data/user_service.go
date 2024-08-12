@@ -1,8 +1,8 @@
 package data
 
 import (
-	"context"
 	"errors"
+	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"github.com/Hailemari/task_manager/models"
@@ -54,7 +54,24 @@ func GetUserByUsername(username string) (*models.User, error) {
 	return user, nil
 }
 
-func PromoteUser(username string) error {
+func PromoteUser(username string) error {	
+	// Check the user's current role
+	var user bson.M
+	err := userCollection.FindOne(context.TODO(), bson.M{"username": username}).Decode(&user)
+
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return errors.New("user not found")
+		}
+		return err
+	}
+
+	// Check if the user is already an admin
+	if userRole, ok := user["role"].(string); ok && userRole == "admin" {
+		return errors.New("user is already an admin")
+	}
+
+	// Proceed with the update if the user is not already an admin
 	result, err := userCollection.UpdateOne(
 		context.TODO(), 
 		bson.M{"username": username},

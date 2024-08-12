@@ -1,14 +1,16 @@
 package controllers
 
 import (
-    "io"
-    "bytes"
+	"bytes"
+	"io"
 	"net/http"
+	"strings"
+
+	"github.com/Hailemari/task_manager/data"
+	"github.com/Hailemari/task_manager/middleware"
+	"github.com/Hailemari/task_manager/models"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
-	"github.com/Hailemari/task_manager/data"
-	"github.com/Hailemari/task_manager/models"
-	"github.com/Hailemari/task_manager/middleware"
 )
 
 
@@ -167,8 +169,13 @@ func LoginUser(ctx *gin.Context) {
 }
 
 func PromoteUser(ctx *gin.Context) {
+	// Get the username from the URL parameter and sanitize it
 	username := ctx.Param("username")
 
+	username = strings.TrimSpace(username)
+	username = strings.Trim(username, `"`)
+
+	// Call the data layer function to promote the user
 	if err := data.PromoteUser(username); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return 
