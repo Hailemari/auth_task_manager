@@ -271,3 +271,5 @@ You can use [MongoDB Compass](https://www.mongodb.com/products/compass) to inspe
 ## API Versioning
 
 The current API version is `v1`. Future updates and changes may introduce new versions.
+
+## For more information see this <u>[Postman Documentation](https://documenter.getpostman.com/view/22137934/2sA3s4nAoA)</u>

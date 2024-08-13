@@ -79,19 +79,11 @@ func DeleteTask(id string) error {
 	}
 	return nil
 }
-
 func UpdateTask(id string, updatedTask models.Task) error {
-	// Validate task before updating
-	if err := updatedTask.Validate(); err != nil {
-		return err
-	}
+	// Find the task and update it with the new data
+	result := taskCollection.FindOneAndUpdate(context.TODO(), bson.D{{Key:  "id", Value: id}}, bson.D{{Key: "$set", Value: updatedTask}})
 
-	result := taskCollection.FindOneAndUpdate(
-		context.TODO(),
-		bson.D{{Key: "id", Value: id}},
-		bson.D{{Key: "$set", Value: updatedTask}},
-	)
-
+	// Check if the task was successfully updated
 	if result.Err() != nil {
 		if result.Err() == mongo.ErrNoDocuments {
 			return errors.New("task not found")
@@ -100,6 +92,7 @@ func UpdateTask(id string, updatedTask models.Task) error {
 	}
 	return nil
 }
+
 
 func AddTask(newTask models.Task) error {
 	// Check if a task with the same ID already exists

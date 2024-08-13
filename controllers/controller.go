@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"fmt"
 
 	"github.com/Hailemari/task_manager/data"
 	"github.com/Hailemari/task_manager/middleware"
@@ -53,6 +54,8 @@ func DeleteTask(ctx *gin.Context) {
 
 func UpdateTask(ctx *gin.Context) {
 	id := ctx.Param("id")
+	id = strings.TrimSpace(id)
+
 	var updatedTask models.Task
 
 	bodyBytes, err := io.ReadAll(ctx.Request.Body)
@@ -72,6 +75,10 @@ func UpdateTask(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	// Debugging: Log or print the values of updatedTask and id
+	fmt.Printf("Updating task with ID: %s\n", id)
+	fmt.Printf("Updated Task: %+v\n", updatedTask)
 
 	if err := data.UpdateTask(id, updatedTask); err != nil {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "Task not found"})
