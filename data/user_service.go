@@ -5,7 +5,7 @@ import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"github.com/Hailemari/task_manager/models"
+	"github.com/Hailemari/auth_task_manager/models"
 )
 
 var userCollection *mongo.Collection

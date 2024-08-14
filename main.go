@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 	"github.com/joho/godotenv"
-	"github.com/Hailemari/task_manager/data"
-	"github.com/Hailemari/task_manager/router"
+	"github.com/Hailemari/auth_task_manager/data"
+	"github.com/Hailemari/auth_task_manager/router"
 
 )
 

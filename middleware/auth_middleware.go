@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/Hailemari/task_manager/models"
+	"github.com/Hailemari/auth_task_manager/models"
 )
 
 func GenerateToken(user *models.User) (string, error){

@@ -7,9 +7,9 @@ import (
 	"strings"
 	"fmt"
 
-	"github.com/Hailemari/task_manager/data"
-	"github.com/Hailemari/task_manager/middleware"
-	"github.com/Hailemari/task_manager/models"
+	"github.com/Hailemari/auth_task_manager/data"
+	"github.com/Hailemari/auth_task_manager/middleware"
+	"github.com/Hailemari/auth_task_manager/models"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 )

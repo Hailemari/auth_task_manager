@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/Hailemari/task_manager/models"
+	"github.com/Hailemari/auth_task_manager/models"
 )
 
 var taskCollection *mongo.Collection

@@ -1,22 +1,21 @@
 package router
 
 import (
-	"github.com/Hailemari/task_manager/controllers"
-	"github.com/Hailemari/task_manager/middleware"
+	"github.com/Hailemari/auth_task_manager/controllers"
+	"github.com/Hailemari/auth_task_manager/middleware"
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
-	
+
 	// Public routes
 	r.POST("/register", controllers.CreateUser)
 	r.POST("/login", controllers.LoginUser)
 
-
 	// Protected routes
 	auth := r.Group("/")
-	auth.Use(middleware.AuthMiddleware()) 
+	auth.Use(middleware.AuthMiddleware())
 	{
 		auth.GET("/tasks", controllers.GetTasks)
 		auth.GET("/tasks/:id", controllers.GetTask)
